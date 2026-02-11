@@ -1,10 +1,12 @@
 package com.mohan.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,4 +16,10 @@ public class Department {
     private Long id;
     private String departmentName;
     private String description;
+
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+   // @JsonBackReference // in recursion avoid
+    private List<Student> students=new ArrayList<>();
+
 }
