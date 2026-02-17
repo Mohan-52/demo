@@ -25,4 +25,9 @@ public class StudentController {
     public List<StudentResDto> getAllStudents(){
         return studentService.getAllStudents();
     }
+
+    @GetMapping("/courses/{courseId}")
+    public List<StudentResDto> getStudents(@PathVariable Long courseId){
+        return studentService.getStudentsByCourse(courseId);
+    }
 }

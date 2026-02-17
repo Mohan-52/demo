@@ -27,7 +27,6 @@ public class StudentService {
         response.setStudentId(student.getId());
         response.setStudentName(student.getName());
         response.setEmail(student.getEmail());
-        response.setDepartmentName(student.getDepartment().getDepartmentName());
         return response;
 
     }
@@ -50,6 +49,13 @@ public class StudentService {
 
     public List<StudentResDto> getAllStudents(){
         return studentRepository.findAll().stream()
+                .map(this::mapToDto)
+                .toList();
+    }
+
+    public List<StudentResDto> getStudentsByCourse(Long courseId){
+        return studentRepository.findByCourses_Id(courseId)
+                .stream()
                 .map(this::mapToDto)
                 .toList();
     }
